@@ -13,4 +13,3 @@ print('suma en ambito global',suma,id(suma))
 sumar()
 print ('Despues de llamar a la funciòn sumar')
 print('suma en el àmbito global',suma,id(suma))
-      
