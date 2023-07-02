@@ -1,35 +1,43 @@
-
-
 import random
 import matplotlib.pyplot as plt
 
-def galton_simulation(levels, bolls):
-    '''
-    definition the funtion for the simulation
-    '''
-    columns = [0] * (levels + 1)
-    '''for the numbers of columns to feel'''
-    for _ in range(bolls):
-        position = 6  # star tu feel in the midle of the columns
-        for levels in range(levels):
-            direction = random.choice([-1, 1]) #choice left (-1) or right (1) direction
-            position += direction
-        columns[position] += 1
+def galton_simulator(rows, balls):
+    ''' define funtion for the Galton Bell code'''
+    slots = [0] * (rows + 1)  # start with parameters in 0
+    
+    for _ in range(balls):
+        position = num_rows // 2  # sgtar in de midle
         
-    return columns
-
-def grafic_results(columns):
-    '''grafic de columns with de bolls'''
-    plt.bar(range(len(columns)), columns)
-    plt.xlabel('Columns')
-    plt.ylabel('Number of bolls')
-    plt.title('Galton Bell Simulation')
+        for _ in range(rows):
+            direction = random.choice([-1, 1])  # choice left or right
+            
+            # move the position de balls 
+            position += direction
+            if position >= 11:
+                slots[position] += 1
+            elif position <= 0:
+                slots[position] += 1
+            break
+          
+        slots[position] += 1  # fill the slots of balls
+    
+    return slots    
+# historgram parameters and configuration
+def plot_distribution(slots):
+    x = range(len(slots))
+    y = slots
+    plt.bar(x, y)
+    plt.xlabel('Compartimento')
+    plt.ylabel('Cantidad de bolas')
+    plt.title('Distribución de la Campana de Galton')
     plt.show()
-    '''this is te grafic where X line is the columns and the Y line is the numbers of bolls'''
-levels = 12  # this is the numbe of levels(star on 0 then te number of columns is 13)
-bolls = 3000  # This is the number of bolls
-
-result = galton_simulation(levels, bolls)
-grafic_results(result)
 
 
+num_rows = 11
+num_balls = 3000
+
+# execute
+distribution = galton_simulator(num_rows, num_balls)
+
+# grafic the results of distribution
+plot_distribution(distribution)
