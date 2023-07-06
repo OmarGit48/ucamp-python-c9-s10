@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 
 def galton_simulator(rows, balls):
     ''' define funtion for the Galton Bell code'''
-    slots = [0] * (rows + 1)  # start with parameters in 0
+    slots = [0] * rows  # start with parameters in 0
     
     for _ in range(balls):
         position = num_rows // 2  # sgtar in de midle
@@ -13,11 +13,10 @@ def galton_simulator(rows, balls):
             
             # move the position de balls 
             position += direction
-            if position >= 11:
-                slots[position] += 1
-            elif position <= 0:
-                slots[position] += 1
-            break
+            if position > 11:
+                position = 11
+            elif position < 0:
+                position = 0
           
         slots[position] += 1  # fill the slots of balls
     
@@ -33,7 +32,7 @@ def plot_distribution(slots):
     plt.show()
 
 
-num_rows = 11
+num_rows = 12
 num_balls = 3000
 
 # execute
